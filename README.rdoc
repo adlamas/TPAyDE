@@ -1,5 +1,10 @@
 
-1) Instalar Ruby versión 2.1.8p440 \n
+1) Instalar Ruby versión 2.1.8p440
+
 2) Instalar Rails 4.2.6
+
 3) Descargar el proyecto
+
 4) Escribir en la terminal 'bundle install' eso descargará las gemas que hagan falta
+
+
