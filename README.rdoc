@@ -7,4 +7,4 @@
 
 4) Escribir en la terminal 'bundle install' eso descargará las gemas que hagan falta
 
-
+5) Para levantar el servidor ejecutar en la consola 'rails server' o 'rails s'
