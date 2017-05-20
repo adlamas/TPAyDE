@@ -1,0 +1,2 @@
+module RegisterFoodHelper
+end
