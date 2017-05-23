@@ -1,3 +1,3 @@
 class RegisterFoodController < ApplicationController
-
+ 
 end
