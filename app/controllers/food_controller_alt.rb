@@ -1,4 +1,8 @@
+#Este controlador lo reemplazamos por el food_controller
+
+=begin
 class FoodController < ApplicationController
+
 
   def create
     foods = food_params
@@ -21,3 +25,4 @@ class FoodController < ApplicationController
   end
 
 end
+=end
