@@ -39,6 +39,7 @@
 	</p>
 
 	<%= link_to 'Editar grupo ', edit_food_path(food)  %>
+	<%= link_to "Borrar entrada", food_path(food), method: :delete, data: { confirm: '¿Seguro?' } %>
 	
 </div>
 
