@@ -2,17 +2,45 @@
 
 <br>
 
-<h2 style="text-align: center">Registrar menúes</h2>
+<h2 style="text-align: center">¿Cuantas personas comerán hoy de tu equipo?</h2>
 <div class="field" style="margin-top: 10px;text-align: center" class="col-sm-4 col-sm-offset-4'">
   <%= form_for :food do |f| %>
       <p>
         <%= f.label :Cantidad %><br>
         <%= f.number_field :quantity%>
       </p>
+
+      <p>
+        <%= f.label :Nombre_de_grupo %><br>
+        <%= f.text_field :group_name%>
+      </p>
+
       <div>
         <button class="btn btn-primary" type="submit">Enviar</button>
       </div>
   <% end %>
 </div>  
 
+<% @foods.each do |food| %>
+<div style="margin-bottom: 40px;">
+	<p>
+	  <strong>Cantidad:</strong>
+	  <%= food.quantity %>
+	</p>
+
+	<p>
+	  <strong>Nombre del grupo:</strong>
+	  <%= food.group_name %>
+	</p>
+
+	<p>
+	  <strong>Fecha:</strong>
+	  <%= food.date %>
+	</p>
+
+	<%= link_to 'Editar grupo ', edit_food_path(food)  %>
+	
+</div>
+
+<% end %>
 
