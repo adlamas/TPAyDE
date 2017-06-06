@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plato:</strong>
+  <%= @menu.dish %>
+</p>
+
+<p>
+  <strong>Días disponible:</strong>
+  <%= @menu.day %>
+</p>
+
+<%= link_to 'Editar', edit_menu_path(@menu) %> |
+<%= link_to 'Volver', menus_path %>

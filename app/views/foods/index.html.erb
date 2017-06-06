@@ -21,6 +21,8 @@
   <% end %>
 </div>  
 
+<%= link_to 'Ver menus del día', menus_path %>
+
 <% @foods.each do |food| %>
 <div style="margin-bottom: 40px;">
 	<p>
@@ -42,6 +44,7 @@
 	<%= link_to "Borrar entrada", food_path(food), method: :delete, data: { confirm: '¿Seguro?' } %>
 	
 </div>
+
 
 <% end %>
 

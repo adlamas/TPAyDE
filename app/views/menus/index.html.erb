@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista de Menus</h1>
+
+<table border="1" width="50%" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Platos</th>
+      <th>Días disponibles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td><%= menu.dish %></td>
+        <td><%= menu.day %></td>
+        <td><%= link_to 'Editar', edit_menu_path(menu) %></td>
+        <td><%= link_to 'Eliminar', menu, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Agregar nuevo Menu', new_menu_path %><br>
+<%= link_to 'Volver al registro', foods_path %>
