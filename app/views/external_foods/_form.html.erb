@@ -1,0 +1,26 @@
+<%= form_for(@external_food) do |f| %>
+  <% if @external_food.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@external_food.errors.count, "error") %> prohibited this external_food from being saved:</h2>
+
+      <ul>
+      <% @external_food.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <!-- <div class="field">
+    < %= f.label :date %><br>
+    < %= f.date_select :date %>
+  </div> !-->
+
+  <div class="actions">
+    <%= f.submit "Aceptar comensales externos" %>
+  </div>
+<% end %>

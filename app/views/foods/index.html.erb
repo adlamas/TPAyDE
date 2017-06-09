@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+		<p id="notice"><%= notice %></p>
 
 <br>
 
@@ -7,11 +7,11 @@
   <%= form_for :food do |f| %>
       <p>
         <%= f.label :Cantidad %><br>
-        <%= f.number_field :quantity%>
+        <%= f.number_field :id_user%>
       </p>
 
       <p>
-        <%= f.label :Nombre_de_grupo %><br>
+        <%= f.label :Clientes %><br>
         <%= f.text_field :group_name%>
       </p>
 
@@ -19,32 +19,74 @@
         <button class="btn btn-primary" type="submit">Enviar</button>
       </div>
   <% end %>
-</div>  
-
-<%= link_to 'Ver menus del día', menus_path %>
-
-<% @foods.each do |food| %>
-<div style="margin-bottom: 40px;">
-	<p>
-	  <strong>Cantidad:</strong>
-	  <%= food.quantity %>
-	</p>
-
-	<p>
-	  <strong>Nombre del grupo:</strong>
-	  <%= food.group_name %>
-	</p>
-
-	<p>
-	  <strong>Fecha:</strong>
-	  <%= food.date %>
-	</p>
-
-	<%= link_to 'Editar grupo ', edit_food_path(food)  %>
-	<%= link_to "Borrar entrada", food_path(food), method: :delete, data: { confirm: '¿Seguro?' } %>
-	
 </div>
 
+<div class="col-sm-12" style="text-align: center">	
+	<h2><%= link_to '¿Cuantas personas fuera de la organización comerán?', new_external_food_path %></h2>
+</div>
 
-<% end %>
+  
+<div class="col-sm-12" style="text-align: center">	
+	<h2><%= link_to 'Ver menus del día', menus_path %></h2>
+</div>
 
+<div class="col-sm-6">
+	<% @users.each do |user| %>
+		<div style="margin-bottom: 10px;">
+			<table>
+				<tr>
+					<td><strong>Nombre: </strong></td>
+			  		<td><%= user.name + ' ' + user.surname + '  ' %></td>				
+					<td><strong> | Email: </strong></td>
+			  		<td><%= user.email %></td>
+			  		<td><%= link_to "Agregar" , "foods/create"%></td>
+				</tr>
+			</table>	
+		</div>
+	<% end %>	
+</div>
+
+<div class="col-sm-4">
+<h3>Comensales internos</h3>
+
+	<% @foods.each do |food| %>
+		<div style="margin-bottom: 40px;">
+			<p>
+			  <strong>Id del usuario:</strong>
+			  <%= food.id_user %>
+			</p>
+
+			<p>
+			  <strong>Fecha:</strong>
+			  <%= food.date %>
+			</p>
+
+			<%= link_to 'Editar entrada ', edit_food_path(food)  %>
+			<%= link_to "Borrar entrada", food_path(food), method: :delete, data: { confirm: '¿Seguro?' } %>
+			
+		</div>
+	<% end %>
+		
+	<h3>Comensales fuera de la organización</h3>
+
+	<% @external_foods.each do |e_food| %>
+		<div style="margin-bottom: 40px;">
+			<p>
+			  <strong>Cantidad</strong>
+			  <%= e_food.quantity %>
+			</p>
+
+			<p>
+			  <strong>Fecha:</strong>
+			  <%= e_food.date %>
+			</p>
+
+			<%= link_to 'Editar entrada ', edit_external_food_path(e_food)  %>
+			<%= link_to "Borrar entrada", external_food_path(e_food), method: :delete, data: { confirm: '¿Seguro?' } %>
+			
+		</div>
+	<% end %>
+
+
+
+</div>

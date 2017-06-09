@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @external_food.quantity %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @external_food.date %>
+</p>
+
+<%= link_to 'Edit', edit_external_food_path(@external_food) %> |
+<%= link_to 'Back', external_foods_path %>

@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605185241) do
+ActiveRecord::Schema.define(version: 20170608235107) do
+
+  create_table "external_foods", force: :cascade do |t|
+    t.integer  "quantity"
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "foods", force: :cascade do |t|
-    t.integer  "quantity"
+    t.integer  "id_user"
     t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

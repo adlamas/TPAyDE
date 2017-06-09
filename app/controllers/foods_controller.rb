@@ -6,7 +6,11 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.json
   def index
-    @foods = Food.all
+   # @foods = Food.where(date: Date.today)
+    @foods = Food.all();
+    @users = User.all
+    @external_foods = ExternalFood.all();
+
   end
 
   # GET /foods/1
@@ -17,6 +21,7 @@ class FoodsController < ApplicationController
   # GET /foods/new
   def new
     @food = Food.new
+    @user = User.new
 
   end
 
@@ -73,6 +78,6 @@ class FoodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def food_params
-      params.require(:food).permit(:quantity, :date, :group_name)
+      params.require(:food).permit(:id_user, :date, :group_name)
     end
 end
