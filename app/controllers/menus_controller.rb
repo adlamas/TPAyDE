@@ -1,4 +1,6 @@
 class MenusController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   # GET /menus
@@ -20,6 +22,7 @@ class MenusController < ApplicationController
   # GET /menus/1/edit
   def edit
   end
+
 
   # POST /menus
   # POST /menus.json

@@ -6,10 +6,15 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.json
   def index
-   # @foods = Food.where(date: Date.today)
-    @foods = Food.all();
+    @foods = Food.where(date: Date.today)
+    #@foods = Food.all();
     @users = User.all
-    @external_foods = ExternalFood.all();
+    @external_foods = ExternalFood.where(date: Date.today);
+    @cantidad = 0;
+    @external_foods.each do |food|
+      
+      @cantidad = food.quantity + @cantidad
+    end
 
   end
 
