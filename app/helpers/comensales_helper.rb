@@ -1,0 +1,2 @@
+module ComensalesHelper
+end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :comensales
+  resources :comensales
+  resources :comensales
+  resources :comensales
+  resources :comensales
+  resources :comensales
   resources :external_foods
   resources :menus
   resources :foods

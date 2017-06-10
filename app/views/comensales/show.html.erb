@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id legajo:</strong>
+  <%= @comensale.id_legajo %>
+</p>
+
+<p>
+  <strong>Mail:</strong>
+  <%= @comensale.mail %>
+</p>
+
+<p>
+  <strong>Tipo comensal:</strong>
+  <%= @comensale.tipo_comensal %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @comensale.proyecto %>
+</p>
+
+<p>
+  <strong>Fecha notificacion:</strong>
+  <%= @comensale.fecha_notificacion %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @comensale.cantidad %>
+</p>
+
+<%= link_to 'Edit', edit_comensale_path(@comensale) %> |
+<%= link_to 'Back', comensales_path %>

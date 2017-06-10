@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608235107) do
+ActiveRecord::Schema.define(version: 20170609174120) do
+
+  create_table "comensales", force: :cascade do |t|
+    t.integer  "id_legajo"
+    t.string   "mail"
+    t.string   "tipo_comensal"
+    t.string   "proyecto"
+    t.datetime "fecha_notificacion"
+    t.integer  "cantidad"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "external_foods", force: :cascade do |t|
     t.integer  "quantity"

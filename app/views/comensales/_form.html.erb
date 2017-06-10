@@ -1,0 +1,100 @@
+<!--
+<div class="container">
+  <%= form_for(@comensale) do |f| %>
+    <% if @comensale.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comensale.errors.count, "error") %> prohibited this comensale from being saved:</h2>
+
+        <ul>
+        <% @comensale.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :id_legajo %><br>
+      <%= f.number_field :id_legajo %>
+    </div>
+    <div class="field">
+      <%= f.label :mail %><br>
+      <%= f.text_field :mail %>
+    </div>
+    <div class="field">
+      <%= f.label :tipo_comensal %><br>
+      <%= f.text_field :tipo_comensal %>
+    </div>
+    <div class="field">
+      <%= f.label :proyecto %><br>
+      <%= f.text_field :proyecto %>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_notificacion %><br>
+      <%= f.datetime_select :fecha_notificacion %>
+    </div>
+    <div class="field">
+      <%= f.label :cantidad %><br>
+      <%= f.number_field :cantidad %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
+-->
+
+<div class="container" style="width: 50%">
+  <%= form_for(@comensale) do |f| %>
+    <% if @comensale.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comensale.errors.count, "error") %> prohibited this comensale from being saved:</h2>
+
+        <ul>
+        <% @comensale.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <form role="form" action="/comensales/create" class="nifty_form" method="post" >
+    <div class="form-group">
+      <label for="legajo_1"><%= f.label :id_legajo %></label>
+      <input type="text" class="form-control" id="legajo_1"
+             placeholder="Introduce tu legajo" name=comensale[id_legajo]>
+    </div>
+    <div class="form-group">
+      <label for="mail_1"><%= f.label :mail %></label>
+      <input type="email" class="form-control" id="mail_1"
+             placeholder="Introduce tu email" name=comensale[mail]>
+    </div>
+    <div class="form-group">
+      <label for="text"><%= f.label :tipo_comensal %></label>
+      <%= f.select :tipo_comensal, ['Empleado','Gerente','Director','Invitado'], :selected => 'Empleado' %>
+    </div>
+
+
+    <div class="form-group">
+      <label for="text">¿Desea informár por la totalidad de miembros de su equipo?</label>
+      <%= f.select :title, ['Si','No'], :selected => 'Si' %>
+    </div>
+    <div class="form-group">
+      <label for="text"><%= f.label :proyecto %></label>
+      <input type="text" class="form-control" id="tipo_comensal_1" 
+             placeholder="Ingrese el nombre del proyecto" name=comensale[proyecto]>
+    </div>
+    <div class="form-group">
+      <label for="text"><%= f.label :cantidad %></label>
+      <input type="text" class="form-control" id="cantidad_1" 
+             placeholder="¿Cuantas personas va a notificar?" name=comensale[cantidad]>
+    </div>
+    <div class="actions">
+      <%= f.submit "Enviar" %>
+    </div>    
+    <div class="form-group" style="visibility:hidden">
+      <label for="text"><%= f.label :fecha_notificacion %></label>
+      <input id="fecha_1" name="comensale[fecha_notificacion]" type="date" value="<%=Time.now.strftime("%Y-%m-%d %R")%>"  />
+    </div>   
+  </form>
+  <% end %>
+</div>

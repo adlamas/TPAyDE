@@ -1,0 +1,48 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<p id="notice"><%= notice %></p>
+
+<h1>Lista de Comensales</h1>
+
+<div class="container">
+  <h2>¿Quién come hoy?</h2>
+  <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:
+  <%= column_chart @comensales_count %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id legajo</th>
+        <th>Mail</th>
+        <th>Tipo comensal</th>
+        <th>Proyecto</th>
+        <th>Fecha notificacion</th>
+        <th>Cantidad</th>
+        <!--
+        <th colspan="3"></th>
+        -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @comensales.each do |comensale| %> 
+      <tr>
+        <td><%= comensale.id_legajo %></td>
+        <td><%= comensale.mail %></td>
+        <td><%= comensale.tipo_comensal %></td>
+        <td><%= comensale.proyecto %></td>
+        <td><%= comensale.fecha_notificacion %></td>
+        <td><%= comensale.cantidad %></td>
+        <!--
+        <td><%= link_to 'Show', comensale %></td>
+        <td><%= link_to 'Edit', edit_comensale_path(comensale) %></td>
+        <td><%= link_to 'Destroy', comensale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        -->
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</div>
+
+
+<br>
+
+<%= link_to '¿Desea ingresar nuevos comensales?', new_comensale_path %>
