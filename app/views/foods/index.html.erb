@@ -53,10 +53,11 @@
 	<thead>
 		<th>Comensales Internos</th>
 	</thead>
+	<thead>
 		<th>Fecha</th>
 		<th>Cantidad</th>
       	<th colspan="3"></th>
-
+    </thead>
 	<tbody>
 		<% @foods.each do |food|%>
 		<tr>
@@ -81,9 +82,12 @@
 	<thead>
 		<th>Comensales Invitados</th>
 	</thead>
+	<thead>
 		<th>Fecha</th>
 		<th>Cantidad</th>
       	<th colspan="3"></th>
+
+	</thead>
 
 	<tbody>
 		<% @external_foods.each do |e_food|%>
