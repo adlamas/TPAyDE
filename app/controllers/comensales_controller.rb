@@ -1,12 +1,33 @@
 class ComensalesController < ApplicationController
   before_action :set_comensale, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /comensales
   # GET /comensales.json
   def index
+  	
+ 
+	# strftime - formatear tiempo (stringfy time)
+	# %d - día (day)
+	# %m - mes (month)
+	# %Y - año (year)
+	# %H - hora en formato 24 horas (hour)
+	# %M - minuto
+	# %S - segundo (second)
+  	fecha_hoy = Time.now
+	dia = fecha_hoy.strftime("%d")
+	mes = fecha_hoy.strftime("%m")
+	anio = fecha_hoy.strftime("%Y")
+
+	limite_normal = Time.gm(anio,mes,9,21,53,00)
+	limite_tarde = Time.gm(anio,mes,10,21,58,00)
+
     @comensales = Comensale.all
-    @comensales_count = Comensale.group(:tipo_comensal).sum(:cantidad)
+    @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
+    @comensales_count_tarde = Comensale.where("fecha_notificacion > ? and fecha_notificacion < ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
+    @comensales_count_tardes = Comensale.where("fecha_notificacion > ?", limite_normal).group(:tipo_comensal).sum(:cantidad)
   end
+
 
   # GET /comensales/1
   # GET /comensales/1.json
