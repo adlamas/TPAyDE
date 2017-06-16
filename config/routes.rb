@@ -1,20 +1,15 @@
 Rails.application.routes.draw do
-  resources :comensales
-  resources :comensales
-  resources :comensales
-  resources :comensales
-  resources :comensales
-  resources :comensales
-  resources :external_foods
+  resources :comensales 
+  #resources :external_foods
   resources :menus
-  resources :foods
+  #resources :foods
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'foods#index'
+   root 'comensales#index'
   #get '/foods/listed_food' => 'food#listed_food'
   
 

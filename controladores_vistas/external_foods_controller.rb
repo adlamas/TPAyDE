@@ -1,6 +1,6 @@
 class ExternalFoodsController < ApplicationController
 
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :set_external_food, only: [:show, :edit, :update, :destroy]
 
   # GET /external_foods

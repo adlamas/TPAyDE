@@ -157,13 +157,17 @@ function valida(e){
       <input type="text" class="form-control" id="cantidad_1" onkeypress="return valida(event)" 
              placeholder="¿Cuantas personas va a notificar?" name=comensale[cantidad]>
     </div>
-    <div class="actions">
-      <%= f.submit "Enviar" %>
+    <div class="actions ">
+      <%= f.submit "Enviar" , {:class=>'btn btn-success'} %>
     </div>    
     <div class="form-group" style="visibility:hidden">
       <label for="text"><%= f.label :fecha_notificacion %></label>
       <input id="fecha_1" name="comensale[fecha_notificacion]" type="date" value="<%=Time.now.strftime("%Y-%m-%d %R")%>"  />
-    </div>   
+    </div>
+
+    <h2>
+  <%= link_to "Cancelar y volver a la página principal", comensales_path, {style: 'color: white;', :class=>'btn btn-warning'}  %>
+  </h2>    
   </form>
   <% end %>
 </div>

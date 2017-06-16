@@ -1,12 +1,20 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <p id="notice"><%= notice %></p>
 
-<h1>Lista de Comensales</h1>
+<h1 style="text-align: center">Lista de Comensales</h1>
 
 <div class="container">
   <h2>¿Quién come hoy?</h2>
   <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:</p>
 
+<<<<<<< Updated upstream
+=======
+  <h2 class="btn btn-primary">
+  <%= link_to "Agregar comensales", new_comensale_path, {style: 'color: white; background: none'}  %>
+  </h2>
+
+  <BR><BR>
+>>>>>>> Stashed changes
 
   <p>Comensales informados antes de las 21:53 del 09/06/2017</p>
   <%= column_chart @comensales_count_normal %>
