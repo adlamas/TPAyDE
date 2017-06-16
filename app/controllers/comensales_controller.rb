@@ -18,9 +18,11 @@ class ComensalesController < ApplicationController
 	dia = fecha_hoy.strftime("%d")
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
+  
 
 	limite_normal = Time.gm(anio,mes,9,21,53,00)
 	limite_tarde = Time.gm(anio,mes,10,21,58,00)
+
 
     @comensales = Comensale.all
     @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
