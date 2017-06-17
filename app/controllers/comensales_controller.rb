@@ -53,7 +53,7 @@ class ComensalesController < ApplicationController
   # POST /comensales.json
   def create
     @comensale = Comensale.new(comensale_params)
-    @comensale.fecha_notificacion = DateTime.now()
+    
 
     respond_to do |format|
       if @comensale.save
