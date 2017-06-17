@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609174120) do
+ActiveRecord::Schema.define(version: 20170617014519) do
 
   create_table "comensales", force: :cascade do |t|
     t.integer  "id_legajo"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170609174120) do
 
   create_table "menus", force: :cascade do |t|
     t.string   "dish"
-    t.string   "day"
+    t.datetime "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
