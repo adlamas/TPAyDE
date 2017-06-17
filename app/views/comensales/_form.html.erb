@@ -128,11 +128,7 @@ function valida(e){
       </div>
     <% end %>
   <form role="form" action="/comensales/create" class="nifty_form" method="post" >
-    <div class="form-group">
-      <label for="legajo_1"><%= f.label :id_legajo %></label>
-      <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
-             placeholder="Introduce tu legajo" name=comensale[id_legajo]>
-    </div>
+    
     <div class="form-group">
       <label for="mail_1"><%= f.label :mail %></label>
       <input type="email" class="form-control" id="mail_1"

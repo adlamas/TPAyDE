@@ -14,7 +14,7 @@ class ComensalesController < ApplicationController
 	# %H - hora en formato 24 horas (hour)
 	# %M - minuto
 	# %S - segundo (second)
-  	fecha_hoy = Time.now
+  fecha_hoy = Date.today()
 	dia = fecha_hoy.strftime("%d")
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
@@ -24,7 +24,14 @@ class ComensalesController < ApplicationController
 	limite_tarde = Time.gm(anio,mes,10,21,58,00)
 
 
-    @comensales = Comensale.all
+    @comensales = Comensale.where(fecha_notificacion: Date.today)
+    @fecha = (DateTime.now).hour
+    @tempra
+    @tarde
+    @afuera
+
+
+
     @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tarde = Comensale.where("fecha_notificacion > ? and fecha_notificacion < ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tardes = Comensale.where("fecha_notificacion > ?", limite_normal).group(:tipo_comensal).sum(:cantidad)
@@ -93,6 +100,6 @@ class ComensalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comensale_params
-      params.require(:comensale).permit(:id_legajo, :mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
+      params.require(:comensale).permit(:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
     end
 end
