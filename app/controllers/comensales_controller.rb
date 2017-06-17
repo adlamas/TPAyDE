@@ -24,13 +24,10 @@ class ComensalesController < ApplicationController
 	limite_tarde = Time.gm(anio,mes,10,21,58,00)
 
 
-    @comensales = Comensale.where(fecha_notificacion: Date.today)
-    @fecha = (DateTime.now).hour
-    @tempra
-    @tarde
-    @afuera
-
-
+    @comensales = Comensale.all()
+    #@comensales = Comensale.where(fecha_notificacion: DateTime.now().hour)
+    #@fecha = (DateTime.now).hour
+    #@fecha = @comensales.length
 
     @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tarde = Comensale.where("fecha_notificacion > ? and fecha_notificacion < ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
@@ -56,10 +53,11 @@ class ComensalesController < ApplicationController
   # POST /comensales.json
   def create
     @comensale = Comensale.new(comensale_params)
+    @comensale.fecha_notificacion = DateTime.now()
 
     respond_to do |format|
       if @comensale.save
-        format.html { redirect_to @comensale, notice: 'Comensale was successfully created.' }
+        format.html { redirect_to @comensale, notice: 'Se ha agregado una nueva entrada' }
         format.json { render :show, status: :created, location: @comensale }
       else
         format.html { render :new }
