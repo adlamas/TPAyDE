@@ -1,12 +1,18 @@
 class MenusController < ApplicationController
 
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /menus
   # GET /menus.json
   def index
+   
     @menus = Menu.all
+
+    # Hay que ver como hacer para obtener el dia de hoy
+    @menus_del_dia = Menu.where("day like ?", '%Viernes%')
+
   end
 
   # GET /menus/1

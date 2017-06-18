@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-gem 'mysql', '~> 2.9.1'
+#gem 'mysql', '~> 2.9.1'
 #gem 'mysql2', '~> 0.3.13'
 
 #para hacer graficos

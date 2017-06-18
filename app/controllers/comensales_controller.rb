@@ -1,6 +1,6 @@
 class ComensalesController < ApplicationController
   before_action :set_comensale, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   
   # GET /comensales
   # GET /comensales.json
@@ -14,10 +14,11 @@ class ComensalesController < ApplicationController
 	# %H - hora en formato 24 horas (hour)
 	# %M - minuto
 	# %S - segundo (second)
-  	fecha_hoy = Time.now
+  fecha_hoy = Date.today()
 	dia = fecha_hoy.strftime("%d")
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
+  
 
 
 	tipo_empleado = "Empleado"
@@ -28,7 +29,12 @@ class ComensalesController < ApplicationController
 	limite_normal = Time.gm(anio,mes,dia,12,00,00)
 	limite_tarde = Time.gm(anio,mes,dia,13,00,00)
 
-    @comensales = Comensale.all
+
+    @comensales = Comensale.all()
+    #@comensales = Comensale.where(fecha_notificacion: DateTime.now().hour)
+    #@fecha = (DateTime.now).hour
+    #@fecha = @comensales.length
+
     @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tarde = Comensale.where("fecha_notificacion > ? and fecha_notificacion < ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tardes = Comensale.where("fecha_notificacion > ?", limite_normal).group(:tipo_comensal).sum(:cantidad)
@@ -61,10 +67,11 @@ class ComensalesController < ApplicationController
   # POST /comensales.json
   def create
     @comensale = Comensale.new(comensale_params)
+    
 
     respond_to do |format|
       if @comensale.save
-        format.html { redirect_to @comensale, notice: 'Comensale was successfully created.' }
+        format.html { redirect_to @comensale, notice: 'Se ha agregado una nueva entrada' }
         format.json { render :show, status: :created, location: @comensale }
       else
         format.html { render :new }
@@ -105,6 +112,6 @@ class ComensalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comensale_params
-      params.require(:comensale).permit(:id_legajo, :mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
+      params.require(:comensale).permit(:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
     end
 end

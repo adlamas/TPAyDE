@@ -1,12 +1,15 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <p id="notice"><%= notice %></p>
 
-<h1>Lista de Comensales</h1>
+<h1 style="text-align: center">Lista de Comensales</h1>
+
+
 
 <div class="container">
   <h2>¿Quién come hoy?</h2>
   <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:</p>
 
+<<<<<<< HEAD
   <p>Comensales informados antes de las 12:00 del 10/06/2017</p>
 
   <%= @comensales_count_empleado%>
@@ -55,11 +58,44 @@
 <div id="columnchart_values2" style="width: 900px; height: 300px;"></div>
 
 <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+=======
+  <h2>
+  <%= link_to "Agregar comensales", new_comensale_path, {style: 'color: white', :class => "btn btn-primary"}  %>
+  
+  <%= link_to "Ver menús", menus_path, {style: 'color: white', :class => "btn btn-success"}  %>
+  </h2>
+
+  <BR><BR>
+
+  <!-- Mostramos los comensales a horario, los ligeramente tarde (de 11hs a 13hs) y los tardes (más de 13hs) !-->
+  <SECTION class="col-sm-12" style="margin-bottom: 250px">
+    <h1 style="text-align: center">Comensales</h1><br><br>
+    
+    <div class="col-sm-4" style="background: #006400; color: white; padding-bottom: 50px; padding-top: 50px">
+      <h2 style="text-align: center">A horario (<%= @comensales_count_normal.length %>)</h2>  
+    </div>
+
+    <div class="col-sm-4" style="background: #003DF5; color: white; padding-bottom: 50px; padding-top: 50px">
+      <h2 style="text-align: center">Entre las 11hs - 13hs (<%= @comensales_count_tarde.length %>)</h2>
+    </div>
+    
+    <div class="col-sm-4" style="background: #FF0000; color: white; padding-bottom: 50px; padding-top: 50px " >
+      <h2 style="text-align: center">Tardes (<%= @comensales_count_tardes.length %>)</h2>
+
+    </div>
+
+  </SECTION>
+
+  <p>Comensales informados antes de las 21:53 del 09/06/2017</p>
+  <%= column_chart @comensales_count_normal %>
+  <p>Comensales informados despues de las 21:53 y antes de las 21:58 del 10/06/2017</p>
+  <%= column_chart @comensales_count_tarde %>
+
+>>>>>>> f62d0e6977e0e3d9840bc6e9f1d2c3bb50b341c0
 
   <table class="table">
     <thead>
       <tr>
-        <th>Id legajo</th>
         <th>Mail</th>
         <th>Tipo comensal</th>
         <th>Proyecto</th>
@@ -73,7 +109,6 @@
     <tbody>
       <% @comensales.each do |comensale| %> 
       <tr>
-        <td><%= comensale.id_legajo %></td>
         <td><%= comensale.mail %></td>
         <td><%= comensale.tipo_comensal %></td>
         <td><%= comensale.proyecto %></td>
