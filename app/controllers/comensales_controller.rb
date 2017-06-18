@@ -19,13 +19,27 @@ class ComensalesController < ApplicationController
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
 
-	limite_normal = Time.gm(anio,mes,9,21,53,00)
-	limite_tarde = Time.gm(anio,mes,10,21,58,00)
+
+	tipo_empleado = "Empleado"
+	tipo_director = "Director"
+	tipo_gerente = "Gerente"
+	tipo_invitado = "Invidato"
+
+	limite_normal = Time.gm(anio,mes,dia,12,00,00)
+	limite_tarde = Time.gm(anio,mes,dia,13,00,00)
 
     @comensales = Comensale.all
     @comensales_count_normal = Comensale.where("fecha_notificacion < ? ", limite_normal).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tarde = Comensale.where("fecha_notificacion > ? and fecha_notificacion < ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
     @comensales_count_tardes = Comensale.where("fecha_notificacion > ?", limite_normal).group(:tipo_comensal).sum(:cantidad)
+
+    @comensales_count_empleado = Comensale.where("fecha_notificacion < ? and tipo_comensal = ?", limite_normal, tipo_empleado).sum(:cantidad)
+    @comensales_count_director = Comensale.where("fecha_notificacion < ?  and tipo_comensal = ?", limite_normal,tipo_director).sum(:cantidad)
+    @comensales_count_gerente = Comensale.where("fecha_notificacion < ?  and tipo_comensal = ?", limite_normal, tipo_gerente).sum(:cantidad)
+    @comensales_count_invitado = Comensale.where("fecha_notificacion < ?  and tipo_comensal = ?", limite_normal, tipo_invitado).sum(:cantidad)
+
+    
+
   end
 
 

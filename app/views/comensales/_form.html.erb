@@ -1,126 +1,130 @@
-<!--
-<div class="container">
-  <%= form_for(@comensale) do |f| %>
-    <% if @comensale.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comensale.errors.count, "error") %> prohibited this comensale from being saved:</h2>
+<!DOCTYPE html>
+<html>
+  <script>
+  function valida(e){
+      tecla = (document.all) ? e.keyCode : e.which;
 
-        <ul>
-        <% @comensale.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      //Tecla de retroceso para borrar, siempre la permite
+      if (tecla==8){
+          return true;
+      }
+          
+      // Patron de entrada, en este caso solo acepta numeros
+      patron =/[0-9]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+  }
+  </script>
+  <script type="text/javascript">
+      function showContent() {
+          element = document.getElementById("content");
+          check = document.getElementById("check");
+          if (check.checked) {
+              element.style.display='block';
+          }
+          else {
+              element.style.display='none';
+          }
+      }
+  </script>
+
+  <% 
+    fecha_hoy = Time.now
+    
+    horaTarde = 19
+    minutoTarde = 35
+
+    hora = fecha_hoy.strftime("%H")
+    minuto = fecha_hoy.strftime("%M")
+
+    hora = hora.to_i
+    minuto = minuto.to_i
+
+    esTarde = false
+
+    if hora > horaTarde
+      esTarde = true
+    end
+
+    if minuto > minutoTarde && !esTarde
+      esTarde = true
+    end
+  %>
+<head>
+  <title>Com&eacute;s hoy? </title>
+</head>
+<body>
+
+  <div class="container" style="width: 50%">
+      <%= form_for(@comensale) do |f| %>
+        <% if @comensale.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@comensale.errors.count, "error") %> prohibited this comensale from being saved:</h2>
+
+            <ul>
+            <% @comensale.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
         <% end %>
-        </ul>
-      </div>
-    <% end %>
+        <% if !esTarde %>
+          <form role="form" action="/comensales/create" class="nifty_form" method="post" >
+            <div class="form-group">
+              <label for="legajo_1"><%= f.label :id_legajo %></label>
+                <% if(user_signed_in?) %>
+                  <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)" disabled="disabled"
+                      value=<%= current_user.legacy %> placeholder="Introduce tu legajo" name=comensale[id_legajo]>
+                  
+                <% else %>
+                  <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
+                               placeholder="Introduce tu legajo" name=comensale[id_legajo]>
+              <% end %>   
+            </div>
+            <div class="form-group">
+              <label for="mail_1"><%= f.label :mail %></label>
+              <% if(user_signed_in?) %>
+                <input type="email" class="form-control" id="mail_1" disabled="disabled"
+                    value=<%= current_user.email %> placeholder="Introduce tu email" name=comensale[mail]>
+              <% else %>
+                <input type="email" class="form-control" id="mail_1"
+                     placeholder="Introduce tu email" name=comensale[mail]>
+              <% end %>
+            </div>
+            <div class="form-group">
+              <label for="text"><%= f.label :tipo_comensal %></label>
+              <%= f.select :tipo_comensal, ['Empleado','Gerente','Director','Invitado'], :selected => 'Empleado' %>
+            </div>
 
-    <div class="field">
-      <%= f.label :id_legajo %><br>
-      <%= f.number_field :id_legajo %>
-    </div>
-    <div class="field">
-      <%= f.label :mail %><br>
-      <%= f.text_field :mail %>
-    </div>
-    <div class="field">
-      <%= f.label :tipo_comensal %><br>
-      <%= f.text_field :tipo_comensal %>
-    </div>
-    <div class="field">
-      <%= f.label :proyecto %><br>
-      <%= f.text_field :proyecto %>
-    </div>
-    <div class="field">
-      <%= f.label :fecha_notificacion %><br>
-      <%= f.datetime_select :fecha_notificacion %>
-    </div>
-    <div class="field">
-      <%= f.label :cantidad %><br>
-      <%= f.number_field :cantidad %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-</div>
--->
-<script>
-function valida(e){
-    tecla = (document.all) ? e.keyCode : e.which;
-
-    //Tecla de retroceso para borrar, siempre la permite
-    if (tecla==8){
-        return true;
-    }
-        
-    // Patron de entrada, en este caso solo acepta numeros
-    patron =/[0-9]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-}
-</script>
-<script type="text/javascript">
-    function showContent() {
-        element = document.getElementById("content");
-        check = document.getElementById("check");
-        if (check.checked) {
-            element.style.display='block';
-        }
-        else {
-            element.style.display='none';
-        }
-    }
-</script>
-
-<div class="container" style="width: 50%">
-  <%= form_for(@comensale) do |f| %>
-    <% if @comensale.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comensale.errors.count, "error") %> prohibited this comensale from being saved:</h2>
-
-        <ul>
-        <% @comensale.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <div class="form-group">
+              <label for="text">¿Desea informár por la totalidad de miembros de su equipo?</label>
+              <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
+            </div>
+            <div class="form-group" id='content' style='display:none;'>
+              <label for="text"><%= f.label :proyecto %></label>
+              <input type="text" class="form-control" id="tipo_comensal_1" 
+                     placeholder="Ingrese el nombre del proyecto" name=comensale[proyecto]>
+            </div>
+            <div class="form-group">
+              <label for="text"><%= f.label :cantidad %></label>
+              <input type="text" class="form-control" id="cantidad_1" onkeypress="return valida(event)" 
+                     placeholder="¿Cuantas personas va a notificar?" name=comensale[cantidad]>
+            </div>
+            <div class="actions">
+              <%= f.submit "Hoy voy a comer" %>
+            </div>    
+            <div class="form-group" style="visibility:hidden">
+              <label for="text"><%= f.label :fecha_notificacion %></label>
+              <input id="fecha_1" name="comensale[fecha_notificacion]" type="date" value="<%=Time.now.strftime("%Y-%m-%d %R")%>"  />
+            </div>   
+          </form>
+        <% else %>
+            <h2>Demasiado tarde para informar</h2>
+            <p>Recuerda que solo tienes tiempo para informar hasta las 12:30</p>                  
+              <%=image_tag("tarde.jpg", class: "img-rounded", width:"601", height:"300")%>
+            <p>M&aacute;s suerte la pr&oacute;xima</p> 
         <% end %>
-        </ul>
-      </div>
-    <% end %>
-  <form role="form" action="/comensales/create" class="nifty_form" method="post" >
-    <div class="form-group">
-      <label for="legajo_1"><%= f.label :id_legajo %></label>
-      <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
-             placeholder="Introduce tu legajo" name=comensale[id_legajo]>
-    </div>
-    <div class="form-group">
-      <label for="mail_1"><%= f.label :mail %></label>
-      <input type="email" class="form-control" id="mail_1"
-             placeholder="Introduce tu email" name=comensale[mail]>
-    </div>
-    <div class="form-group">
-      <label for="text"><%= f.label :tipo_comensal %></label>
-      <%= f.select :tipo_comensal, ['Empleado','Gerente','Director','Invitado'], :selected => 'Empleado' %>
-    </div>
-
-    <div class="form-group">
-      <label for="text">¿Desea informár por la totalidad de miembros de su equipo?</label>
-      <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
-    </div>
-    <div class="form-group" id='content' style='display:none;'>
-      <label for="text"><%= f.label :proyecto %></label>
-      <input type="text" class="form-control" id="tipo_comensal_1" 
-             placeholder="Ingrese el nombre del proyecto" name=comensale[proyecto]>
-    </div>
-    <div class="form-group">
-      <label for="text"><%= f.label :cantidad %></label>
-      <input type="text" class="form-control" id="cantidad_1" onkeypress="return valida(event)" 
-             placeholder="¿Cuantas personas va a notificar?" name=comensale[cantidad]>
-    </div>
-    <div class="actions">
-      <%= f.submit "Enviar" %>
-    </div>    
-    <div class="form-group" style="visibility:hidden">
-      <label for="text"><%= f.label :fecha_notificacion %></label>
-      <input id="fecha_1" name="comensale[fecha_notificacion]" type="date" value="<%=Time.now.strftime("%Y-%m-%d %R")%>"  />
-    </div>   
-  </form>
-  <% end %>
-</div>
+      <% end %>
+  </div>
+</body>
+</html>
