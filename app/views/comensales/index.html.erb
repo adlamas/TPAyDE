@@ -9,56 +9,7 @@
   <h2>¿Quién come hoy?</h2>
   <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:</p>
 
-<<<<<<< HEAD
-  <p>Comensales informados antes de las 12:00 del 10/06/2017</p>
 
-  <%= @comensales_count_empleado%>
-  <%= column_chart @comensales_count_normal, 
-      colors: ["blue", "#231487"],
-      label: "Cantidad",
-      columnchart_values: "values"
-      %>
-  <p>Comensales informados despues de las 12:00 y antes de las 13:00 del 10/06/2017</p>
-  <%= column_chart @comensales_count_tarde, 
-      colors: ["red", "#000"],
-      label: "Cantidad",
-      refresh: 60 %>
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Empleados", <%= @comensales_count_empleado%>, "blue"],
-        ["Invitados", <%= @comensales_count_invitado%>, "blue"],
-        ["Directores", <%= @comensales_count_director%>, "blue"],
-        ["Gerentes", <%= @comensales_count_gerente%>, "blue"]
-      ]);
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation",
-                         fontSize: 17},
-                       2]);
-
-      var options = {
-        title: "Comensales hasta 11:30",
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
-      chart.draw(view, options);
-  }
-  </script>
-<div id="columnchart_values2" style="width: 900px; height: 300px;"></div>
-
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-=======
   <h2>
   <%= link_to "Agregar comensales", new_comensale_path, {style: 'color: white', :class => "btn btn-primary"}  %>
   
@@ -85,13 +36,6 @@
     </div>
 
   </SECTION>
-
-  <p>Comensales informados antes de las 21:53 del 09/06/2017</p>
-  <%= column_chart @comensales_count_normal %>
-  <p>Comensales informados despues de las 21:53 y antes de las 21:58 del 10/06/2017</p>
-  <%= column_chart @comensales_count_tarde %>
-
->>>>>>> f62d0e6977e0e3d9840bc6e9f1d2c3bb50b341c0
 
   <table class="table">
     <thead>
@@ -126,9 +70,3 @@
   </table>
   
 </div>
-
-
-<br>
-
-<%= link_to '¿Desea ingresar nuevos comensales?', new_comensale_path %><br>
-<%= link_to 'Ver menus del día', menus_path %>
