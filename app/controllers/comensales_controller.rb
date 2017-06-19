@@ -14,7 +14,7 @@ class ComensalesController < ApplicationController
 	# %H - hora en formato 24 horas (hour)
 	# %M - minuto
 	# %S - segundo (second)
-  fecha_hoy = Date.today()
+  	fecha_hoy = Date.today()
 	dia = fecha_hoy.strftime("%d")
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
@@ -27,18 +27,18 @@ class ComensalesController < ApplicationController
 	tipo_invitado = "Invitado"
 
 	limite_inicial = Time.gm(anio,mes,10,7,00,00)
-	limite_normal = Time.gm(anio,mes,10,12,00,00)
+	limite_normal = Time.gm(anio,mes,10,12,50,00)
 	limite_tarde = Time.gm(anio,mes,10,14,00,00)
 
 
-    @comensales = Comensale.all()
+    @comensales = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde)
     #@comensales = Comensale.where(fecha_notificacion: DateTime.now().hour)
     #@fecha = (DateTime.now).hour
     #@fecha = @comensales.length
 
+    @comensales_count_total  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde ).sum(:cantidad)
     @comensales_count_normal = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_normal).sum(:cantidad)
-    @comensales_count_tarde  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_normal, limite_tarde).sum(:cantidad)
-    @comensales_count_total  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde).sum(:cantidad)
+    @comensales_count_tarde  = Comensale.where("fecha_notificacion > ? and fecha_notificacion <= ?", limite_normal,  limite_tarde ).sum(:cantidad)
 
     @comensales_count_empleado = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_empleado).sum(:cantidad)
     @comensales_count_director = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_director).sum(:cantidad)
