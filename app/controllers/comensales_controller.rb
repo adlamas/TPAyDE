@@ -36,9 +36,9 @@ class ComensalesController < ApplicationController
     #@fecha = (DateTime.now).hour
     #@fecha = @comensales.length
 
-    @comensales_count_normal = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_normal).group(:tipo_comensal).sum(:cantidad)
-    @comensales_count_tarde  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_normal, limite_tarde).group(:tipo_comensal).sum(:cantidad)
-    @comensales_count_total  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde).group(:tipo_comensal).sum(:cantidad)
+    @comensales_count_normal = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_normal).sum(:cantidad)
+    @comensales_count_tarde  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_normal, limite_tarde).sum(:cantidad)
+    @comensales_count_total  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde).sum(:cantidad)
 
     @comensales_count_empleado = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_empleado).sum(:cantidad)
     @comensales_count_director = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_director).sum(:cantidad)
