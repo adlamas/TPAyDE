@@ -10,32 +10,64 @@
   <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:</p>
 
 
+
+
+  <!-- Mostramos los comensales a horario, los ligeramente tarde (de 11hs a 13hs) y los tardes (más de 13hs) !-->
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Cantidad", { role: "style" } ],
+        ["Empleados", <%= @comensales_count_empleado%>, "blue"],
+        ["Invitados", <%= @comensales_count_invitado%>, "blue"],
+        ["Directores", <%= @comensales_count_director%>, "blue"],
+        ["Gerentes", <%= @comensales_count_gerente%>, "blue"]
+      ]);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation",
+                         fontSize: 17},
+                       2]);
+      var options = {
+        title: "Comensales de hoy",
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
+      chart.draw(view, options);
+    }
+  </script>
+  <div id="columnchart_values2" style="width: 900px; height: 300px;"></div>
+
+  <SECTION class="col-sm-12" style="margin-bottom: 25px">
+    <h1 style="text-align: center">Comensales</h1><br><br>
+    
+    <div class="col-sm-4" style="background: #006400; color: white; padding-bottom: 50px; padding-top: 50px">
+      <h2 style="text-align: center">Total (<%= @comensales_count_total.length %>)</h2>  
+    </div>
+
+    <div class="col-sm-4" style="background: #003DF5; color: white; padding-bottom: 50px; padding-top: 50px">
+      <h2 style="text-align: center">A horario (<%= @comensales_count_normal.length %>)</h2>
+    </div>
+    
+    <div class="col-sm-4" style="background: #FF0000; color: white; padding-bottom: 50px; padding-top: 50px " >
+      <h2 style="text-align: center">Entre las 12hs - 13hs (<%= @comensales_count_tarde.length %>)</h2>
+
+    </div>
+
+  </SECTION>
   <h2>
   <%= link_to "Agregar comensales", new_comensale_path, {style: 'color: white', :class => "btn btn-primary"}  %>
   
   <%= link_to "Ver menús", menus_path, {style: 'color: white', :class => "btn btn-success"}  %>
   </h2>
 
-  <BR><BR>
-
-  <!-- Mostramos los comensales a horario, los ligeramente tarde (de 11hs a 13hs) y los tardes (más de 13hs) !-->
-  <SECTION class="col-sm-12" style="margin-bottom: 250px">
-    <h1 style="text-align: center">Comensales</h1><br><br>
-    
-    <div class="col-sm-4" style="background: #006400; color: white; padding-bottom: 50px; padding-top: 50px">
-      <h2 style="text-align: center">A horario (<%= @comensales_count_normal.length %>)</h2>  
-    </div>
-
-    <div class="col-sm-4" style="background: #003DF5; color: white; padding-bottom: 50px; padding-top: 50px">
-      <h2 style="text-align: center">Entre las 11hs - 13hs (<%= @comensales_count_tarde.length %>)</h2>
-    </div>
-    
-    <div class="col-sm-4" style="background: #FF0000; color: white; padding-bottom: 50px; padding-top: 50px " >
-      <h2 style="text-align: center">Tardes (<%= @comensales_count_tardes.length %>)</h2>
-
-    </div>
-
-  </SECTION>
 
   <table class="table">
     <thead>
