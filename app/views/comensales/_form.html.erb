@@ -109,8 +109,8 @@
               <div class="form-group">
                 <label for="legajo_1"><%= f.label :id_legajo %></label>
                   <% if(user_signed_in?) %>
-                    <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)" disabled="disabled"
-                        value=<%= current_user.legacy %> placeholder="Introduce tu legajo" name=comensale[id_legajo]>
+                    <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
+                        value=<%= current_user.id %> placeholder="Introduce tu legajo" name=comensale[id_legajo]>
                     
                   <% else %>
                     <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
@@ -120,7 +120,7 @@
               <div class="form-group">
                 <label for="mail_1"><%= f.label :mail %></label>
                 <% if(user_signed_in?) %>
-                  <input type="email" class="form-control" id="mail_1" disabled="disabled"
+                  <input type="email" class="form-control" id="mail_1" 
                       value=<%= current_user.email %> placeholder="Introduce tu email" name=comensale[mail]>
                 <% else %>
                   <input type="email" class="form-control" id="mail_1"

@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="text-align: center;">Lista de Menus</h1>
+
+<table border="1" width="30%" cellpadding="0" cellspacing="0" align="center">
+  <thead>
+    <tr>
+      <th>Platos</th>
+      <th>Días disponibles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td><%= menu.dish %></td>
+        <td><%= menu.day %></td>
+        <td><%= link_to 'Editar', edit_menu_path(menu) %></td>
+        <td><%= link_to 'Eliminar', menu, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<!-- /////////////////////////////CARRUSEL ////////////////////////////// !-->
+<div class="container" style="text-align: center;">
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="my-slider" class="carousel slide" data-ride="carousel">
+        
+        <!-- botones  -->
+        <!--
+        <ol class="carousel-indicators">
+          <li data-target="#my-slider" data-slide-to="0" class="active"></li>
+          <li data-target="#my-slider" data-slide-to="1"></li>
+          <li data-target="#my-slider" data-slide-to="2"></li>
+        </ol>
+        -->
+          
+        <div class="carousel-inner" role="listbox">
+   
+          <!-- cada parte y la active es la primera -->
+          <div class="item active">
+            <h1>Menu de Hoy</h1>
+          </div>
+
+          <!-- Si puedo meter esto en comensales deberia andar -->
+          <% @menus_del_dia.each do |menu| %>
+            <div class="item">
+            
+              <h1><%= menu.dish %></h1>
+            </div>
+          <%end%>
+
+        </div>
+
+        <!-- next and prev  -->
+        <a class="carousel-control left" href="#my-slider" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control right" href="#my-slider" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- /////////////////////////FIN CARRUSEL ///////////////////////////// !-->
+<br>
+
+<%= link_to 'Agregar nuevo Menu', new_menu_path %><br>
+<%= link_to 'Volver al registro', comensales_path %>

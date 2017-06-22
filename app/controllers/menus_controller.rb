@@ -11,7 +11,7 @@ class MenusController < ApplicationController
     @menus = Menu.all
 
     # Hay que ver como hacer para obtener el dia de hoy
-    @menus_del_dia = Menu.where("day like ?", '%Viernes%')
+    @menus_del_dia = Menu.where(day: Date.today())
 
   end
 
@@ -34,16 +34,12 @@ class MenusController < ApplicationController
   # POST /menus.json
   def create
     @menu = Menu.new(menu_params)
+    @menu.day = Date.today()
+    @menu.save();
+    redirect_to @menu, notice: 'El menu se creo exitosamente.' 
 
-    respond_to do |format|
-      if @menu.save
-        format.html { redirect_to @menu, notice: 'El menu se creo exitosamente.' }
-        format.json { render :show, status: :created, location: @menu }
-      else
-        format.html { render :new }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
-    end
+    
+    
   end
 
   # PATCH/PUT /menus/1
@@ -78,6 +74,8 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:dish, day:[])
+      params.require(:menu).permit(:dish, :day)
     end
 end
+
+

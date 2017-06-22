@@ -30,7 +30,7 @@ class ComensalesController < ApplicationController
 	limite_normal = Time.gm(anio,mes,10,12,50,00)
 	limite_tarde = Time.gm(anio,mes,10,14,00,00)
 
-
+    
     @comensales = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde)
     #@comensales = Comensale.where(fecha_notificacion: DateTime.now().hour)
     #@fecha = (DateTime.now).hour
@@ -66,7 +66,7 @@ class ComensalesController < ApplicationController
   # POST /comensales.json
   def create
     @comensale = Comensale.new(comensale_params)
-    
+    @comensale.save()
 
     respond_to do |format|
       if @comensale.save
@@ -111,6 +111,6 @@ class ComensalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comensale_params
-      params.require(:comensale).permit(:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
+      params.require(:comensale).permit(:id_legajo,:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
     end
 end
