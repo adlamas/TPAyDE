@@ -25,8 +25,9 @@ class MenusController < ApplicationController
     @menu = Menu.new
   end
 
-  # GET /menus/1/edit
+  #   GET /menus/1/edit
   def edit
+
   end
 
 
@@ -34,11 +35,13 @@ class MenusController < ApplicationController
   # POST /menus.json
   def create
     @menu = Menu.new(menu_params)
-    @menu.day = Date.today()
-    @menu.save();
-    redirect_to @menu, notice: 'El menu se creo exitosamente.' 
-
-    
+    #@menu.day = Date.today() 
+      
+    if @menu.save();
+     redirect_to @menu, notice: 'El menu se creo exitosamente.' 
+    else
+      redirect_to new_menu_path, notice: "Hubo un problema, inténtelo de nuevo"      
+    end
     
   end
 

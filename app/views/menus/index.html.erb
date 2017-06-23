@@ -1,6 +1,32 @@
-<h1 style="text-align: center;">Lista de Menus</h1>
+<h1 style="text-align: center;">Menú de hoy</h1>
+<table border="1" width="60%" cellpadding="0" cellspacing="0" align="center" style="margin-bottom: 60px">
+  <thead>
+    <tr>
+      <th>Platos</th>
+      <th>Días disponibles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<table border="1" width="30%" cellpadding="0" cellspacing="0" align="center">
+  <tbody>
+    <% @menus_del_dia.each do |menu| %>
+      <tr>
+        <td><%= menu.dish %></td>
+        <td><%= menu.day %></td>
+        <td><%= link_to 'Editar', edit_menu_path(menu) %></td>
+        <td><%= link_to 'Eliminar', menu, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div  style="margin-bottom: 60px" >
+<%= link_to 'Crear nuevo menú', new_menu_path, :style => "color: white;", :class=>"btn btn-primary col-sm-2 col-sm-offset-5" %>
+</div>
+<br>
+
+<h1 style="text-align: center;" class="col-sm-12">Menúes históricos</h1>
+<table border="1" width="60%" cellpadding="0" cellspacing="0" align="center" >
   <thead>
     <tr>
       <th>Platos</th>
@@ -21,4 +47,3 @@
   </tbody>
 </table>
 
-<%= link_to 'Crear', new_menu_path %>
