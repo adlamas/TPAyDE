@@ -19,16 +19,16 @@ class ComensalesController < ApplicationController
 	mes = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
   
-
+  @comensales_date = fecha_hoy
 
 	tipo_empleado = "Empleado"
 	tipo_director = "Director"
 	tipo_gerente = "Gerente"
 	tipo_invitado = "Invitado"
 
-	limite_inicial = Time.gm(anio,mes,10,7,00,00)
-	limite_normal = Time.gm(anio,mes,10,12,50,00)
-	limite_tarde = Time.gm(anio,mes,10,14,00,00)
+	limite_inicial = Time.gm(anio,mes,dia,7,00,00)
+	limite_normal = Time.gm(anio,mes,dia,12,50,00)
+	limite_tarde = Time.gm(anio,mes,dia,22,00,00)
 
     
     @comensales = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde)
@@ -44,6 +44,14 @@ class ComensalesController < ApplicationController
     @comensales_count_director = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_director).sum(:cantidad)
     @comensales_count_gerente  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_gerente).sum(:cantidad)
     @comensales_count_invitado = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_invitado).sum(:cantidad)
+
+
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+
 
   end
 
