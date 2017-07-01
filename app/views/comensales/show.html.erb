@@ -1,29 +1,112 @@
-<p id="notice"><%= notice %></p>
+<html>
+  <p id="notice"><%= notice %></p>
+  <script>
+  function valida(e){
+      tecla = (document.all) ? e.keyCode : e.which;
+      //Tecla de retroceso para borrar, siempre la permite
+      if (tecla==8){
+          return true;
+      }
+          
+      // Patron de entrada, en este caso solo acepta numeros
+      patron =/[0-9]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+  }
+  </script>
+  <script type="text/javascript">
+      function showContent() {
+          element = document.getElementById("content");
+          check = document.getElementById("check");
+          if (check.checked) {
+              element.style.display='block';
+          }
+          else {
+              element.style.display='none';
+          }
+          showBotonSub();
+      }
+      function showBotonSub() {
+          element = document.getElementById("botonSub");
+          check = document.getElementById("check");
+          if (check.checked) {
+              element.style.display='block';
+          }
+          else {
+              element.style.display='none';
+          }
+      }
+  </script>
 
-<p>
-  <strong>Mail:</strong>
-  <%= @comensale.mail %>
-</p>
+  <head>
+    <title>Gracias por informar!</title>
+  </head>
+  <body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Mail</th>
+        <th>Tipo comensal</th>
+        <th>Proyecto</th>
+        <th>Fecha notificacion</th>
+        <th>Invitados</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @comensale.mail %></td>
+        <td><%= @comensale.tipo_comensal %></td>
+        <td><%= @comensale.fecha_notificacion %></td>
+        <td><%= @comensale.invitados %></td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>
-  <strong>Tipo comensal:</strong>
-  <%= @comensale.tipo_comensal %>
-</p>
+<!--
+  <div>
+    <%= form_for(@comensale) do |invitado| %>
+    <div class="form-group">
+      <label for="text">Agregar invitado</label>
+      <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
+    </div>
+    <form method="POST" name="envio" action="/comensales/create" id="form_invitados">
+      <input type = "hidden" name = "invitado_tipo"   value = "Invitado"/>
+      <input type = "hidden" name = "invitado_legajo" value =<%= current_user.legacy %>/>
+      <input type = "hidden" name = "invitado_mail"   value =<%= current_user.email %>/>
+      <input type = "hidden" name = "invitado_fecha"  value = "<%=Time.now.strftime("%Y-%m-%d %R")%>"/>
 
-<p>
-  <strong>Proyecto:</strong>
-  <%= @comensale.proyecto %>
-</p>
+      <div class="form-group" id='content' style='display:none;'>
+        <label for="number"><%= invitado.label :cantidad %></label>
+        <select class="selectpicker" name = comensale[cantidad]>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+        </select>
+      </div>
+      <div class="form-group" style="visibility:hidden">
+        <label for="text"><%= invitado.label :fecha_notificacion %></label>
+        <input id="fecha_2" name="comensale[fecha_notificacion]" type="date" value="<%=Time.now.strftime("%d-%m-%Y %R")%>"  />
+      </div>
+      <div class="form-group" style="visibility:hidden">
+        <label for="text"><%= invitado.label :tipo_comensal %></label>
+        <input id="comensal2" name="comensale[tipo_comensal]" type="text" value="Invitado"  />
+      </div>
+      
+      <div class="actions" id='botonSub' style='display: none'>
+        <%= invitado.submit "Hoy voy a comer" %>
+      </div>
+      
+    </form>
 
-<p>
-  <strong>Fecha notificacion:</strong>
-  <%= @comensale.fecha_notificacion %>
-</p>
-
-<p>
-  <strong>Cantidad:</strong>
-  <%= @comensale.cantidad %>
-</p>
-
+  </div>
+  <% end %>
+-->
 <%= link_to 'Editar', edit_comensale_path(@comensale) %> |
 <%= link_to 'Volver', comensales_path %>
+
+
+</body>
+</html>

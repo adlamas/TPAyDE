@@ -40,6 +40,7 @@
         <th>Proyecto</th>
         <th>Fecha notificacion</th>
         <th>Cantidad</th>
+        <th>Invitados</th>
         <!--
         <th colspan="3"></th>
         -->
@@ -51,8 +52,9 @@
         <td><%= comensale.mail %></td>
         <td><%= comensale.tipo_comensal %></td>
         <td><%= comensale.proyecto %></td>
-        <td><%= comensale.fecha_notificaciontrftime('%d/%m/%Y %H:%M:%S')%></td>
+        <td><%= comensale.fecha_notificacion.strftime('%d/%m/%Y %H:%M:%S')%></td>
         <td><%= comensale.cantidad %></td>
+        <td><%= comensale.invitados %></td>
         <!--
         <td><%= link_to 'Show', comensale %></td>
         <td><%= link_to 'Editar', edit_comensale_path(comensale) %></td>

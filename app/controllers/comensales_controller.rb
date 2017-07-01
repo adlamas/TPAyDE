@@ -14,21 +14,23 @@ class ComensalesController < ApplicationController
 	# %H - hora en formato 24 horas (hour)
 	# %M - minuto
 	# %S - segundo (second)
+  	
   	fecha_hoy = Date.today()
-	dia = fecha_hoy.strftime("%d")
-	mes = fecha_hoy.strftime("%m")
+	dia  = fecha_hoy.strftime("%d")
+	mes  = fecha_hoy.strftime("%m")
 	anio = fecha_hoy.strftime("%Y")
   
-  @comensales_date = fecha_hoy
+
+  	@comensales_date = fecha_hoy
 
 	tipo_empleado = "Empleado"
 	tipo_director = "Director"
-	tipo_gerente = "Gerente"
+	tipo_gerente  = "Gerente"
 	tipo_invitado = "Invitado"
 
-	limite_inicial = Time.gm(anio,mes,dia,7,00,00)
-	limite_normal = Time.gm(anio,mes,dia,12,50,00)
-	limite_tarde = Time.gm(anio,mes,dia,22,00,00)
+	limite_inicial = Time.gm(anio,mes,dia,0,00,00)
+	limite_normal  = Time.gm(anio,mes,dia,20,50,00)
+	limite_tarde   = Time.gm(anio,mes,dia,24,00,00)
 
     
     @comensales = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ?", limite_inicial, limite_tarde)
@@ -82,7 +84,7 @@ class ComensalesController < ApplicationController
         format.json { render :show, status: :created, location: @comensale }
       else
         format.html { render :new }
-        format.json { render json: @comensale.errors, status: :unprocessable_entity }
+        format.json { render json: @comensale.errors, status: :unprocessable_entity, notice: 'No se pudo' }
       end
     end
   end
@@ -119,6 +121,6 @@ class ComensalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comensale_params
-      params.require(:comensale).permit(:id_legajo,:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad)
+      params.require(:comensale).permit(:id_legajo,:mail, :tipo_comensal, :proyecto, :fecha_notificacion, :cantidad, :invitados)
     end
 end
