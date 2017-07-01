@@ -4,15 +4,23 @@
 		<th>Empleados</th>
 		<th>Invitados</th>
 		<th>Total</th>
-		<th>Tarde</th>
 	</tr>
 
-	<tr>
-		<td><%= @comensales_date%></td>
-		<td><%= @comensales_count_empleado%></td>
-		<td><%= @comensales_count_invitado%></td>
-		<td><%= @comensales_count_total %></td>
-		<td><%= @comensales_count_tarde %></td>
-	</tr>
+        <% Comensale.select(:fecha_notificacion, "SUM(invitados) as invitados", "SUM(cantidad) as cantidad").group('fecha_notificacion').each do |comensale| %>
+          <tr>
+            <td><%= comensale.fecha_notificacion.strftime('%d/%m/%Y') %></td>
+            <td><%= comensale.cantidad %></td>
+            <td><%= comensale.invitados %></td>
+            <td><%= comensale.cantidad + comensale.invitados %></td>
+           </tr>
+        <% end %>
+        <% Comensale.select("SUM(invitados) as invitados", "SUM(cantidad) as cantidad").each do |comensale| %>
+          <tr>
+            <td></td>
+            <td><%= comensale.cantidad %></td>
+            <td><%= comensale.invitados %></td>
+            <td><%= comensale.cantidad + comensale.invitados %></td>
+          </tr>
+        <% end %>
 
 </table>
