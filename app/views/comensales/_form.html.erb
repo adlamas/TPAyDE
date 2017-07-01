@@ -30,8 +30,8 @@
   <% 
     fecha_hoy = Time.new
     
-    horaTarde = 20
-    minutoTarde = 10
+    horaTarde = 13
+    minutoTarde = 00
     hora = fecha_hoy.strftime("%H")
     minuto = fecha_hoy.strftime("%M")
     hora = hora.to_i
@@ -70,9 +70,8 @@
 
             <form role="form" action="/comensales/create" class="nifty_form" method="post" >
               <div class="form-group">
-                <label for="legajo_1"><%= f.label :id_legajo %></label>
                   <% if(user_signed_in?) %>
-                    <input type="text" class="form-control" id="legajo_1" onkeypress="return valida(event)"
+                    <input type="text" class="form-control hidden" id="legajo_1" onkeypress="return valida(event)"
                         value=<%= current_user.legacy %> placeholder="Introduce tu legajo" name=comensale[id_legajo]>
                     
                   <% else %>
