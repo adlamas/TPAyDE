@@ -14,7 +14,7 @@
     <% @menus_del_dia.each do |menu| %>
       <tr>
         <td><%= menu.dish %></td>
-        <td><%= menu.day %></td>
+        <td><%= menu.day.strftime('%d/%m/%Y') %></td>
         <% if @user.admin %>
         <td><%= link_to 'Editar', edit_menu_path(menu) %></td>
         <td><%= link_to 'Eliminar', menu, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
@@ -49,7 +49,7 @@
     <% @menus.each do |menu| %>
       <tr>
         <td><%= menu.dish %></td>
-        <td><%= menu.day %></td>
+        <td><%= menu.day.strftime('%d/%m/%Y') %></td>
         <% if @user.admin %>
         <td><%= link_to 'Editar', edit_menu_path(menu) %></td>
         <td><%= link_to 'Eliminar', menu, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
