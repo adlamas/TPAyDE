@@ -47,7 +47,6 @@
       <tr>
         <th>Mail</th>
         <th>Tipo comensal</th>
-        <th>Proyecto</th>
         <th>Fecha notificacion</th>
         <th>Invitados</th>
     </thead>
@@ -55,7 +54,7 @@
       <tr>
         <td><%= @comensale.mail %></td>
         <td><%= @comensale.tipo_comensal %></td>
-        <td><%= @comensale.fecha_notificacion %></td>
+        <td><%= @comensale.fecha_notificacion.strftime('%d/%m/%Y %H:%M:%S')%></td>
         <td><%= @comensale.invitados %></td>
       </tr>
     </tbody>
