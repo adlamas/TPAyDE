@@ -12,6 +12,7 @@ class MenusController < ApplicationController
 
     # Hay que ver como hacer para obtener el dia de hoy
     @menus_del_dia = Menu.where(day: Date.today())
+    @user = current_user;
 
   end
 

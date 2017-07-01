@@ -7,44 +7,7 @@
 
 <div class="container">
   <h2>¿Quién come hoy?</h2>
-  <p>En esta pantalla podrá visualizar quienes han confirmado su presencia en el comedor:</p>
-
-
-
-
-  <!-- Mostramos los comensales a horario, los ligeramente tarde (de 11hs a 13hs) y los tardes (más de 13hs) !-->
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Cantidad", { role: "style" } ],
-        ["Empleados", <%= @comensales_count_empleado%>, "blue"],
-        ["Invitados", <%= @comensales_count_invitado%>, "blue"],
-        ["Directores", <%= @comensales_count_director%>, "blue"],
-        ["Gerentes", <%= @comensales_count_gerente%>, "blue"]
-      ]);
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation",
-                         fontSize: 17},
-                       2]);
-      var options = {
-        title: "Comensales de hoy",
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
-      chart.draw(view, options);
-    }
-  </script>
-  <div id="columnchart_values2" style="width: 900px; height: 300px;"></div>
-
+ 
   <SECTION class="col-sm-12" style="margin-bottom: 25px">
     <h1 style="text-align: center">Comensales</h1><br><br>
     
