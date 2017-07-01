@@ -16,11 +16,11 @@
     </div>
 
     <div class="col-sm-4" style="background: #003DF5; color: white; padding-bottom: 50px; padding-top: 50px">
-      <h2 style="text-align: center">A horario (<%= @comensales_count_normal %>)</h2>
+      <h2 style="text-align: center">A horario (<%= @comensales_count_normal+@comensales_count_invitado_normal%>)</h2>
     </div>
     
     <div class="col-sm-4" style="background: #FF0000; color: white; padding-bottom: 50px; padding-top: 50px " >
-      <h2 style="text-align: center">Tarde (<%= @comensales_count_tarde %>)</h2>
+      <h2 style="text-align: center">Tarde (<%= @comensales_count_tarde+@comensales_count_invitado_tardes %>)</h2>
 
     </div>
 
@@ -37,7 +37,6 @@
       <tr>
         <th>Mail</th>
         <th>Tipo comensal</th>
-        <th>Proyecto</th>
         <th>Fecha notificacion</th>
         <th>Cantidad</th>
         <th>Invitados</th>
@@ -51,7 +50,6 @@
       <tr>
         <td><%= comensale.mail %></td>
         <td><%= comensale.tipo_comensal %></td>
-        <td><%= comensale.proyecto %></td>
         <td><%= comensale.fecha_notificacion.strftime('%d/%m/%Y %H:%M:%S')%></td>
         <td><%= comensale.cantidad %></td>
         <td><%= comensale.invitados %></td>

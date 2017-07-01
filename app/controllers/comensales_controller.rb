@@ -45,7 +45,8 @@ class ComensalesController < ApplicationController
     @comensales_count_empleado = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_empleado).sum(:cantidad)
     @comensales_count_director = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_director).sum(:cantidad)
     @comensales_count_gerente  = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_gerente).sum(:cantidad)
-    @comensales_count_invitado = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? and tipo_comensal = ?", limite_inicial, limite_tarde, tipo_invitado).sum(:cantidad)
+    @comensales_count_invitado_normal = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? ", limite_inicial, limite_normal).sum(:invitados)
+    @comensales_count_invitado_tardes = Comensale.where("fecha_notificacion >= ? and fecha_notificacion <= ? ", limite_normal, limite_tarde).sum(:invitados)
 
 
 
